@@ -6,7 +6,7 @@ ACCESS_TOKEN = ''
 AUTHOR_NAME = ''
 publish_url = 'https://api.telegra.ph/createPage'
 fields = {
-    'path': '瞎扯--如何正确地吐槽--Blabla-09-19',
+    'path': '瞎扯/如何正确地吐槽/Blabla',
     'return_content': 'true',
     'access_token': ACCESS_TOKEN,
     'title': '',
@@ -15,7 +15,7 @@ fields = {
 }
 
 TITLE = "瞎扯 · 如何正确地吐槽 / Blabla"
-daily_url = 'https://www.zhihu.com/search?q=知乎晚报&utm_content=search_history&type=content'
+daily_url = 'https://www.zhihu.com/search?q=知乎晚报&type=content&utm_content=search_history&range=1d'
 joker_url = U.get_joker_url(daily_url)
 
 fields['content'] = json.dumps(U.extract_joker_nodes_from_url(joker_url))
@@ -33,6 +33,6 @@ telegraph_url = response['result']['url']
 channel_api = f'https://api.telegram.org/bot802531612:AAH0vY732QpWrfZAhRlrszeDa7S5eEGuYf0/sendMessage?'
 data = {
     'chat_id': '@laobai_interesting',
-    'text': 'https://telegra.ph/瞎扯--如何正确地吐槽--Blabla-09-19'
+    'text': telegraph_url,
 }
 http.request('POST', channel_api, fields=data)

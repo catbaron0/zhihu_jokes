@@ -14,7 +14,7 @@ def get_joker_url(url: str) -> str:
         response.data.decode('utf-8'),
         features="html.parser"
     )
-    daily_node = soup.find_all('h2')[1]
+    daily_node = soup.find_all('h2')[0]
     href = daily_node.find_next('a').attrs['href'].strip('/')
     return href
 
@@ -48,7 +48,6 @@ def dom2node(dom_node) -> Dict:
     node['attrs'] = dom_node.attrs
     if len(dom_node) > 0:
         node['children'] = [dom2node(n) for n in dom_node]
-    # import ipdb; ipdb.set_trace()
     return node
 
 
@@ -72,7 +71,6 @@ def extract_joker_nodes_from_url(url: str) -> List:
     contents = list()
     while True:
         p_joker_node = p_joker_node.find_next_sibling()
-        # import ipdb; ipdb.set_trace()
         if not p_joker_node or p_joker_node.name == 'h2':
             break
         contents.append(dom2node(p_joker_node))
