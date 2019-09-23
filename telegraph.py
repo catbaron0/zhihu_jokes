@@ -14,7 +14,6 @@ fields = {
 }
 
 TITLE = "瞎扯 · 如何正确地吐槽 / Blabla"
-daily_url = 'https://www.zhihu.com/search?q=知乎晚报&type=content&utm_content=search_history&range=1d'
 joker_url = U.get_joker_url(daily_url)
 
 fields['content'] = json.dumps(U.extract_joker_nodes_from_url(joker_url))
