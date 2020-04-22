@@ -65,7 +65,7 @@ def extract_joker_nodes_from_url(url: str) -> List:
     h2: List[Tag] = soup.find_all("h2")
     joker_node = None
     for n in h2:
-        if n.get_text().startswith('🛁'):
+        if n.get_text().strip().startswith('瞎扯 · 如何正确地吐槽'):
             joker_node = n
     assert joker_node
     p_joker_node = joker_node
