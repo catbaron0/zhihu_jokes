@@ -19,7 +19,7 @@ fields = {
 
 TITLE = "瞎扯 · 如何正确地吐槽 / Blabla"
 joker_url = U.get_joker_url()
-f_last_url = work_path/'last_path'
+f_last_url = work_path / 'last_path'
 try:
     with open(f_last_url, 'r') as f:
         last_url = f.read().strip()
@@ -41,8 +41,6 @@ http = urllib3.PoolManager(
 response = http.request('POST', publish_url, fields=fields).data.decode('utf-8')
 response = json.loads(response)
 telegraph_url = response['result']['url']
-# print(json.loads(response.data.decode('utf-8')))
-# print(json.loads(parameters['content']))
 channel_api = f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?'
 data = {
     'chat_id': '@laobai_interesting',
