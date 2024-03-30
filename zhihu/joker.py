@@ -105,8 +105,7 @@ def publish_zhihu_jokes() -> Optional[str]:
     latest_url = get_latest_url(fn)
     joke_url = get_joke_url()
 
-    # if joke_url == latest_url:
-    #     print(joke_url)
-    #     return None
+    if joke_url == latest_url:
+        return None
     set_latest_url(fn, joke_url)
     return create_paragraph(joke_url)

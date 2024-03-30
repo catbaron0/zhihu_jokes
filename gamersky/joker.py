@@ -20,7 +20,7 @@ def page_to_image_messages(url: str) -> List[ImageMessage]:
         return []
     res.encoding = res.apparent_encoding
     soup = BeautifulSoup(res.text, features="html.parser")
-    ctnt_div = soup.find_all("div", {"class":"Mid2L_con"})[0]
+    ctnt_div = soup.find_all("div", {"class": "Mid2L_con"})[0]
     # ctnts = ctnt_div.find_all("p", {"style": "text-align: center;"})
     ctnts = ctnt_div.find_all("p")
 
@@ -29,7 +29,7 @@ def page_to_image_messages(url: str) -> List[ImageMessage]:
         if ctnt.img is None:
             continue
         image_src = ctnt.img["src"]
-        caption = ctnt.text.strip()
+        caption = ctnt.text.strip().split("\n")[0]
         messages.append(
             ImageMessage(image_src, caption)
         )
@@ -86,7 +86,7 @@ def generate_image_joke_messages() -> List[ImageMessage]:
     fn = WORK_PATH / "latest_image_url"
     latest_url = get_latest_url(fn)
     joke_url = get_joke_article_url(tail="囧图")
-    print(joke_url)
+    print("img_url", joke_url)
     if latest_url == joke_url:
         return []
     set_latest_url(fn, joke_url)
@@ -97,7 +97,7 @@ def generate_gif_joke_messages() -> List[ImageMessage]:
     fn = WORK_PATH / "latest_gif_url"
     latest_url = get_latest_url(fn)
     joke_url = get_joke_article_url(tail="动态图")
-    print(joke_url)
+    print("gif_url", joke_url)
     if latest_url == joke_url:
         return []
     set_latest_url(fn, joke_url)
