@@ -5,7 +5,7 @@ import os
 import certifi
 import urllib3
 import json
-from bs4 import BeautifulSoup, NavigableString
+from bs4 import BeautifulSoup, Tag
 
 from .config import ACCESS_TOKEN, AUTHOR_NAME
 from utils import get_latest_url, set_latest_url
@@ -33,7 +33,7 @@ def dom2node(dom_node) -> Dict:
     return: Dict, telegraph node.
     '''
     node = dict()
-    if dom_node is NavigableString:
+    if not isinstance(dom_node, Tag):
         return str(dom_node)
     node['tag'] = dom_node.name
     if dom_node.name == 'blockquote':
@@ -105,8 +105,8 @@ def publish_zhihu_jokes() -> Optional[str]:
     latest_url = get_latest_url(fn)
     joke_url = get_joke_url()
 
-    if joke_url == latest_url:
-        print(joke_url)
-        return None
+    # if joke_url == latest_url:
+    #     print(joke_url)
+    #     return None
     set_latest_url(fn, joke_url)
     return create_paragraph(joke_url)

@@ -25,7 +25,9 @@ class Channel:
             'caption': caption,
         }
         api_url = f'https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto?'
-        self.http.request('POST', api_url, fields=data)
+        self.http.request(
+            'POST', api_url, fields=data, disable_notification=True
+        )
 
     def send_video(self, video_url, caption):
         data = {
@@ -34,4 +36,6 @@ class Channel:
             'caption': caption,
         }
         api_url = f'https://api.telegram.org/bot{BOT_TOKEN}/sendVideo?'
-        self.http.request('POST', api_url, fields=data)
+        self.http.request(
+            'POST', api_url, fields=data, disable_notification=True
+        )
