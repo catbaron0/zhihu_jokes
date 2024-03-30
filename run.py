@@ -6,7 +6,7 @@ from gamersky.joker import generate_image_joke_messages
 
 messages = generate_gif_joke_messages()
 print("image gif number", len(messages))
-for msg in messages[33:50]:
+for msg in messages[:50]:
     res = send_gif(msg.image_src, msg.caption)
     print(msg)
     print(res)
