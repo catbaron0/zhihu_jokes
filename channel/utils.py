@@ -11,8 +11,10 @@ def retry(func, retry=4):
     def wrapper(*args, **kwargs):
         for i in range(retry):
             res = func(*args, **kwargs)
-            if res.status == 200:
+            if res.status_code == 200:
                 return res
+            print(res)
+            print(res.text)
             print(f"retry for the {i+1}th time.")
             time.sleep(5)
     return wrapper
